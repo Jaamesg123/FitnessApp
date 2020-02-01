@@ -1,3 +1,4 @@
+import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -34,7 +35,7 @@ public class Menu {
 				if(selection.equals("1")) {
 					//method();
 				} else if (selection.equals("2")) {
-					//method();
+					//getAllInstructors();
 				} else if (selection.equals("3")) {
 					//method();
 				} else if (selection.equals("4")) {
@@ -67,6 +68,11 @@ public class Menu {
 		} while (!selection.equals("-1"));
 	}
 	
+	private void getAllInstructors() {
+		// TODO Auto-generated method stub
+		
+	}
+
 	private void printMenu() {
 		System.out.println("Select an Option:\n---------------------------------");
 		for (int i = 0; i < options.size(); i++) {
