@@ -8,7 +8,7 @@ public class Instructors {
 	private String classes_taught;
 	private double pay_rate;
 	
-	
+
 	public Instructors(int instructor_ID, String instructor_FN, String instructor_LN, String classes_taught,
 			double pay_rate) {
 		super();

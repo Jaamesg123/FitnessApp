@@ -1,11 +1,13 @@
 package entity;
 
+
 import java.util.List;
 
 public class Classes {
 
 	private int classId;
 	private String classType;
+
 	private String dateAndTime;
 	private List<Clients> clients;
 	
@@ -47,6 +49,15 @@ public class Classes {
 
 	public void setClients(List<Clients> clients) {
 		this.clients = clients;
+	private dateAndTime;
+	private List<Clients> clients;
+	
+	public Classes(int classId, String clssType, List<Clients> clients) {
+		this.classId = classId;
+		this.classType = classType;
+		this.clients = clients;
+		
+
 	}
 	
 	

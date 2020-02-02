@@ -62,5 +62,8 @@ public class ClassesDao {
 		return new Classes(classId, classType, dateAndTime, classesDao.getClientsByClassID(classId));
 
 	}
-	
+
+public class ClassesDao {
+
+
 }
