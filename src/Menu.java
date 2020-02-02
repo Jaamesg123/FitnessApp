@@ -1,5 +1,6 @@
 import java.sql.Date;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.List;
@@ -37,7 +38,7 @@ public class Menu {
 			"Delete Instructor",
 			"Add New Instrcutor");
 	
-	public void start() throws SQLException {
+	public void start() throws SQLException, ParseException {
 		String selection = "";
 		
 		do {
@@ -68,7 +69,6 @@ public class Menu {
 				} else if (selection.equals("11")) {
 					updatePayRate();
 				} else if (selection.equals("12")) {
-					
 					deleteInstructor();
 				} else if (selection.equals("13")) {
 					addNewInstructor();
@@ -166,18 +166,14 @@ public class Menu {
 		clientsDao.deleteClientById(id);
 	}
 	
-	private void addNewClient() throws SQLException {
+	private void addNewClient() throws SQLException, ParseException {
 		System.out.println("Enter first name:");
 		String fName = scanner.nextLine();
 		System.out.println("Enter last name");
 		String lName = scanner.nextLine();
 		System.out.println("Enter birthdate (YYYY-MM-DD");
-<<<<<<< HEAD
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("YYYY-MM-DD");
 		Date birthdate = (Date) simpleDateFormat.parse(scanner.nextLine());
-=======
-		Date birthdate = Date.parse(scanner.nextLine());
->>>>>>> b04e38d85492ae9097a6c2462a1c108875ad7f57
 		System.out.println("Enter 4-digit class ID:");
 		int classId = Integer.parseInt(scanner.nextLine());
 		clientsDao.createNewClient(fName, lName, birthdate, classId);
