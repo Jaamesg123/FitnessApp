@@ -1,5 +1,6 @@
 import java.sql.Date;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -54,7 +55,7 @@ public class Menu {
 				} else if (selection.equals("8")) {
 					updateClientClass();
 				} else if (selection.equals("9")) {
-					deleteClient;
+					deleteClient();
 				} else if (selection.equals("10")) {
 					addNewClient();
 				} else if (selection.equals("11")) {
@@ -120,7 +121,8 @@ public class Menu {
 		System.out.println("Enter last name");
 		String lName = scanner.nextLine();
 		System.out.println("Enter birthdate (YYYY-MM-DD");
-		Date birthdate = parser.parse(scanner.nextLine());
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("YYYY-MM-DD");
+		Date birthdate = (Date) simpleDateFormat.parse(scanner.nextLine());
 		System.out.println("Enter 4-digit class ID:");
 		int classId = Integer.parseInt(scanner.nextLine());
 		clientsDao.createNewClient(fName, lName, birthdate, classId);
