@@ -13,6 +13,11 @@ import entity.Instructors;
 public class InstructorsDao {
 
 	private Connection connection = DBConnector.getConnection();
+
+	private String GET_INSTRUCTORS = "SELECT * FROM instructors";
+	
+	
+
 	private final  String NEW_INSTRUCTOR = "Insert into food(instructor_FN, instructor_LN, classes_taught, pay_rate)" +
 			"values(?,?,?,?)";
 	private String GET_INSTRUCTORS = "SELECT * FROM instructors";
@@ -45,6 +50,9 @@ public class InstructorsDao {
 		
 		return populateInstructors(instructor_ID, instructor_FN, instructor_LN, classes_taught, pay_rate);
 	}
+
+}
+
 	
 	public void updatePay(int instructor_ID, double pay_rate) throws SQLException {
 		PreparedStatement ps = connection.prepareStatement(UPDATE_PAY);
@@ -59,4 +67,5 @@ public class InstructorsDao {
 		ps.executeUpdate();
 	}
 }
+
 
