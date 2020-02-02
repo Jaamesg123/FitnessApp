@@ -2,16 +2,17 @@ CREATE database IF NOT exists FitnessDB;
 
 use FitnessDB;
 
-DROP TABLE IF EXISTS classes;
 DROP TABLE IF EXISTS clients;
 DROP TABLE IF EXISTS instructors;
+DROP TABLE IF EXISTS classes;
+
 
 CREATE TABLE instructors (
 	instructor_ID int(6) auto_increment NOT NULL,
 	instructor_FN varchar(15) NOT NULL,
 	instructor_LN varchar(20) NOT NULL,
 	class_taught varchar(255) NOT NULL,
-	pay_rate double(3, 2),
+	pay_rate double(6, 2),
 	PRIMARY KEY (instructor_ID)
 	
 );
