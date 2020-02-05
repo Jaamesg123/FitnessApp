@@ -2,7 +2,7 @@ package entity;
 
 import java.sql.Date;
 
-public class Clients {
+public class Client {
 	
 	private int id;
 	private String fName;
@@ -11,7 +11,7 @@ public class Clients {
 	private int classId;
 	
 	
-	public Clients (int id, String fName, String lName, Date birthdate, int classId) {
+	public Client (int id, String fName, String lName, Date birthdate, int classId) {
 		this.setId(id);
 		this.setfName(fName);
 		this.setlName(lName);

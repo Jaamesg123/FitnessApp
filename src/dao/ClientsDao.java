@@ -8,7 +8,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import entity.Clients;
+import entity.Client;
+import utils.DBConnector;
 
 public class ClientsDao {
 
@@ -24,23 +25,26 @@ public class ClientsDao {
 		connection = DBConnector.getConnection();
 	}
 	
-	public List<Clients> getClients() throws SQLException {
+	public List<Client> getClients() throws SQLException {
 		ResultSet rs = connection.prepareStatement(GET_CLIENTS_QUERY).executeQuery();
-		List<Clients> clients = new ArrayList<Clients>();
+		List<Client> clients = new ArrayList<Client>();
 		
 		while (rs.next() ) {
-			clients.add(populateClients(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getDate(4), rs.getInt(5)));
+			clients.add(populateClient(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getDate(4), rs.getInt(5)));
 		}
 		
 		return clients;
 	}
 	
-	public Clients getClientsByClassID(int classID) throws SQLException {
+	public List<Client> getClientsByClassID(int classID) throws SQLException {
+		List<Client> clients = new ArrayList<Client>();
 		PreparedStatement ps = connection.prepareStatement(GET_CLIENTS_BY_CLASSID_QUERY);
 		ps.setInt(1, classID);
 		ResultSet rs = ps.executeQuery();
-		rs.next();
-		return populateClients(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getDate(4), rs.getInt(5));
+		while (rs.next()) {
+			clients.add(populateClient(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getDate(4), rs.getInt(5)));
+		}
+		return clients;
 	}
 	
 	public void updateClientClassById (int classId, int clientId) throws SQLException {
@@ -65,8 +69,8 @@ public class ClientsDao {
 		ps.executeUpdate();
 	}
 	
-	private Clients populateClients(int id, String fName, String lName, Date birthdate, int classId) {
-		return new Clients (id, fName, lName, birthdate, classId);
+	private Client populateClient(int id, String fName, String lName, Date birthdate, int classId) {
+		return new Client (id, fName, lName, birthdate, classId);
 	}
 	
 	
