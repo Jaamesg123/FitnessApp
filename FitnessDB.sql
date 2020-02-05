@@ -20,7 +20,7 @@ CREATE TABLE instructors (
 CREATE TABLE classes (
 	class_ID int(4) auto_increment NOT NULL,
 	class_type varchar(15) NOT NULL,
-	date_and_time DATETIME NOT NULL, 
+	date_and_time varchar(25) NOT NULL, 
 	instructor_ID int(6),
 	FOREIGN KEY (instructor_ID) REFERENCES instructors (instructor_ID),
 	PRIMARY KEY (class_ID)

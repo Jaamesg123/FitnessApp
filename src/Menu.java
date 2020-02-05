@@ -5,23 +5,20 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
-
 import javax.swing.text.html.parser.Parser;
-
-import com.mysql.cj.ParseInfo;
-
 import dao.ClassesDao;
 import dao.ClientsDao;
 import dao.InstructorsDao;
 import entity.Clients;
 import entity.Instructors;
+import entity.Classes;
 
 public class Menu {
 	
 	private ClientsDao clientsDao = new ClientsDao();
 	private ClassesDao classesDao = new ClassesDao();
 	private InstructorsDao instructorDao = new InstructorsDao();
-	
+
 	private Scanner scanner = new Scanner(System.in);
 	private List<String> options = Arrays.asList(
 			"View List of All Classes",
@@ -47,7 +44,7 @@ public class Menu {
 			
 			try {
 				if(selection.equals("1")) {
-					//method();
+					displayClasses();
 				} else if (selection.equals("2")) {
 					viewAllInstructors();
 				} else if (selection.equals("3")) {
@@ -55,11 +52,11 @@ public class Menu {
 				} else if (selection.equals("4")) {
 					viewClientsInSpecificClass();
 				} else if (selection.equals("5")) {
-					//method();
+					updateClassDateAndTime();
 				} else if (selection.equals("6")) {
-					//method();
+					deleteClass();
 				} else if (selection.equals("7")) {
-					//method();
+					createClass();
 				} else if (selection.equals("8")) {
 					updateClientClass();
 				} else if (selection.equals("9")) {
@@ -86,6 +83,14 @@ public class Menu {
 		System.out.println("Select an Option:\n---------------------------------");
 		for (int i = 0; i < options.size(); i++) {
 			System.out.println(i + 1 + ") " + options.get(i));
+		}
+	}
+	
+
+	private void displayClasses() throws SQLException {
+		List<Classes> classes = classesDao.getClasses();
+		for (Classes classe : classes) {
+			System.out.println(classe.getClassId() + ": " + classe.getClassType() + "  Date and Time of class: " + classe.getDateAndTime());
 		}
 	}
 	
@@ -133,7 +138,7 @@ public class Menu {
 		for (Instructors instructor : instructors) {
 			System.out.println("Instructor ID: " + instructor.getInstructor_ID() + ", Instructor First Name: " + instructor.getInstructor_FN() + ", Instructor Last Name: " + instructor.getInstructor_LN() + ", Pay Rate: " + instructor.getPay_rate() + ", Classes Taught: " + instructor.getClass());
 		}
-		
+
 		
 	}
 	
@@ -151,6 +156,29 @@ public class Menu {
 		Clients clients = clientsDao.getClientsByClassID(classId);
 		System.out.println(clients.getfName() + " " + clients.getlName());
 	}
+
+	private void updateClassDateAndTime() throws SQLException {
+		System.out.println("Enter Class ID you want to change the date and time for: ");
+		int classId = Integer.parseInt(scanner.nextLine());
+		System.out.println("Enter new date and time: ");
+		String dateAndTime = scanner.nextLine();
+		classesDao.updateClassDateAndTimeById(classId, dateAndTime);
+	}
+	
+	private void deleteClass() throws SQLException {
+		System.out.println("Enter the class ID you would like to delete: ");
+		int classId = Integer.parseInt(scanner.nextLine());
+		classesDao.deleteClassById(classId);
+	}
+	
+	private void createClass() throws SQLException {
+		System.out.println("Enter class type: ");
+		String classType = scanner.nextLine();
+		System.out.println("Enter the date and time of the class: ");
+		String dateAndTime = scanner.nextLine();
+		classesDao.createNewClassById(classType, dateAndTime);
+	}
+
 
 	private void updateClientClass() throws SQLException {
 		System.out.println("Enter client's new class id:");
