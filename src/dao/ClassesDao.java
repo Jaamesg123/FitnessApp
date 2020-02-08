@@ -7,28 +7,29 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import entity.Classes;
+import entity.Class;
+import utils.DBConnector;
 import dao.ClientsDao;
 
 
 public class ClassesDao {
 	
 	private Connection connection;
-	private ClassesDao classesDao; 
+	private ClientsDao clientsDao; 
 	private final String GET_CLASSES_QUERY = "SELECT * FROM CLASSES";
 	private final String UPDATE_CLASS_DATE_AND_TIME_QUERY = "UPDATE classes SET date_and_time = ? WHERE class_id = ?";
 	private final String DELETE_CLASS_QUERY = "DELETE FROM classes WHERE class_id = ?";
-	private final String CREATE_NEW_CLASS_QUERY = "INSERT INTO classes(type, date_and_time) VALUES(?,?)";
+	private final String CREATE_NEW_CLASS_QUERY = "INSERT INTO classes(class_type, date_and_time) VALUES(?,?)";
 	
 	public ClassesDao() {
 		connection = DBConnector.getConnection();
-		classesDao = new ClassesDao();
+		clientsDao = new ClientsDao();
 		
 	}
 	
-	public List<Classes> getClasses() throws SQLException {
+	public List<Class> getClasses() throws SQLException {
 		ResultSet rs = connection.prepareStatement(GET_CLASSES_QUERY).executeQuery();
-		List<Classes> classes = new ArrayList<Classes>();
+		List<Class> classes = new ArrayList<Class>();
 		
 		while (rs.next()) {
 			classes.add(populateClasses(rs.getInt(1), rs.getString(2), rs.getString(3)));
@@ -58,12 +59,11 @@ public class ClassesDao {
 	
 	
 	
-	private Classes populateClasses(int classId, String classType, String dateAndTime) throws SQLException {
-		return new Classes(classId, classType, dateAndTime, classesDao.getClientsByClassID(classId));
+	private Class populateClasses(int classId, String classType, String dateAndTime) throws SQLException {
+		return new Class(classId, classType, dateAndTime, clientsDao.getClientsByClassID(classId));
 
 	}
 
-public class ClassesDao {
 
 
 }

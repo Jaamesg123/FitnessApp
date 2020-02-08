@@ -1,6 +1,6 @@
 package entity;
 
-public class Instructors {
+public class Instructor {
 	
 	private int instructor_ID;
 	private String instructor_FN;
@@ -9,7 +9,7 @@ public class Instructors {
 	private double pay_rate;
 	
 
-	public Instructors(int instructor_ID, String instructor_FN, String instructor_LN, String classes_taught,
+	public Instructor(int instructor_ID, String instructor_FN, String instructor_LN, String classes_taught,
 			double pay_rate) {
 		super();
 		this.instructor_ID = instructor_ID;

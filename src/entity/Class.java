@@ -3,19 +3,18 @@ package entity;
 
 import java.util.List;
 
-public class Classes {
+public class Class {
 
 	private int classId;
 	private String classType;
 
 	private String dateAndTime;
-	private List<Clients> clients;
+	private List<Client> clients;
 	
-	public Classes(int classId, String classType, String dateAndTime, List<Clients> clients) {
+	public Class(int classId, String classType, String dateAndTime, List<Client> clients) {
 		this.setClassId(classId);
 		this.setClassType(classType);
 		this.setDateAndTime(dateAndTime);
-		this.setClients(clients);
 		
 	}
 
@@ -43,21 +42,23 @@ public class Classes {
 		this.dateAndTime = dateAndTime;
 	}
 
-	public List<Clients> getClients() {
+
+
+	
+	public Class(int classId, String clssType, List<Client> clients) {
+		this.classId = classId;
+		this.classType = classType;
+		this.setClients(clients);
+		
+
+	}
+
+	public List<Client> getClients() {
 		return clients;
 	}
 
-	public void setClients(List<Clients> clients) {
+	public void setClients(List<Client> clients) {
 		this.clients = clients;
-	private dateAndTime;
-	private List<Clients> clients;
-	
-	public Classes(int classId, String clssType, List<Clients> clients) {
-		this.classId = classId;
-		this.classType = classType;
-		this.clients = clients;
-		
-
 	}
 	
 	

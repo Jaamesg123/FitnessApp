@@ -1,16 +1,17 @@
 import java.sql.Date;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import javax.swing.text.html.parser.Parser;
-import com.mysql.cj.ParseInfo;
 import dao.ClassesDao;
 import dao.ClientsDao;
 import dao.InstructorsDao;
-import entity.Clients;
-import entity.Instructors;
-import entity.Classes;
+import entity.Client;
+import entity.Instructor;
+import entity.Class;
 
 public class Menu {
 	
@@ -34,8 +35,12 @@ public class Menu {
 			"Delete Instructor",
 			"Add New Instrcutor");
 	
+<<<<<<< HEAD
 
 	public void start() throws SQLException {
+=======
+	public void start() throws SQLException, ParseException {
+>>>>>>> 6cd25c223037272f8411fafccded9dd4b3442cd3
 		String selection = "";
 		
 		do {
@@ -52,7 +57,6 @@ public class Menu {
 				} else if (selection.equals("4")) {
 					viewClientsInSpecificClass();
 				} else if (selection.equals("5")) {
-
 					updateClassDateAndTime();
 				} else if (selection.equals("6")) {
 					deleteClass();
@@ -89,8 +93,8 @@ public class Menu {
 	
 
 	private void displayClasses() throws SQLException {
-		List<Classes> classes = classesDao.getClasses();
-		for (Classes classe : classes) {
+		List<Class> classes = classesDao.getClasses();
+		for (Class classe : classes) {
 			System.out.println(classe.getClassId() + ": " + classe.getClassType() + "  Date and Time of class: " + classe.getDateAndTime());
 		}
 	}
@@ -135,8 +139,8 @@ public class Menu {
 
 	
 	private void viewAllInstructors() throws SQLException {
-		List<Instructors> instructors = instructorDao.getInstructors(); 
-		for (Instructors instructor : instructors) {
+		List<Instructor> instructors = instructorDao.getInstructors(); 
+		for (Instructor instructor : instructors) {
 			System.out.println("Instructor ID: " + instructor.getInstructor_ID() + ", Instructor First Name: " + instructor.getInstructor_FN() + ", Instructor Last Name: " + instructor.getInstructor_LN() + ", Pay Rate: " + instructor.getPay_rate() + ", Classes Taught: " + instructor.getClass());
 		}
 
@@ -144,8 +148,8 @@ public class Menu {
 	}
 	
 	private void viewAllClients() throws SQLException {
-		List<Clients> clients = clientsDao.getClients();
-		for (Clients client : clients) {
+		List<Client> clients = clientsDao.getClients();
+		for (Client client : clients) {
 			System.out.println("Client ID:" + client.getId() + ", Client Name:" + client.getfName() + " " + client.getlName()
 			+ ", DOB:" + client.getBirthdate() + ", Class ID:" + client.getClassId());
 		}
@@ -154,8 +158,11 @@ public class Menu {
 	private void viewClientsInSpecificClass() throws SQLException {
 		System.out.println("Enter class id: ");
 		int classId = Integer.parseInt(scanner.nextLine());
-		Clients clients = clientsDao.getClientsByClassID(classId);
-		System.out.println(clients.getfName() + " " + clients.getlName());
+		List<Client> clients = clientsDao.getClientsByClassID(classId);
+		for (Client client : clients) {
+			System.out.println(client.getfName() + " " + client.getlName());
+		}
+		
 	}
 
 	private void updateClassDateAndTime() throws SQLException {
@@ -195,13 +202,14 @@ public class Menu {
 		clientsDao.deleteClientById(id);
 	}
 	
-	private void addNewClient() throws SQLException {
+	private void addNewClient() throws SQLException, ParseException {
 		System.out.println("Enter first name:");
 		String fName = scanner.nextLine();
 		System.out.println("Enter last name");
 		String lName = scanner.nextLine();
 		System.out.println("Enter birthdate (YYYY-MM-DD");
-		Date birthdate = Date.parse(scanner.nextLine());
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("YYYY-MM-DD");
+		Date birthdate = (Date) simpleDateFormat.parse(scanner.nextLine());
 		System.out.println("Enter 4-digit class ID:");
 		int classId = Integer.parseInt(scanner.nextLine());
 		clientsDao.createNewClient(fName, lName, birthdate, classId);
