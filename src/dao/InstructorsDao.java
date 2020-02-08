@@ -14,7 +14,7 @@ public class InstructorsDao {
 
 	private Connection connection = DBConnector.getConnection();
 
-	private String GET_INSTRUCTORS = "SELECT * FROM instructors";
+	
 	
 	
 
@@ -51,7 +51,7 @@ public class InstructorsDao {
 		return populateInstructors(instructor_ID, instructor_FN, instructor_LN, classes_taught, pay_rate);
 	}
 
-}
+
 
 	
 	public void updatePay(int instructor_ID, double pay_rate) throws SQLException {

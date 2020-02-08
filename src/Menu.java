@@ -34,7 +34,7 @@ public class Menu {
 			"Delete Instructor",
 			"Add New Instrcutor");
 	
-	public void start() {
+
 	public void start() throws SQLException {
 		String selection = "";
 		
